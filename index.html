@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remahlatse Domestic Services</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg,#e8fbf1 0%, #f8fafc 28%, #f8fafc 100%);
+      color: #0f172a;
+    }
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #dcfce7;
+      color: #065f46;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    h1 {
+      font-size: 48px;
+      line-height: 1.05;
+      margin: 18px 0 12px;
+    }
+    .lead {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #475569;
+      max-width: 760px;
+      margin-bottom: 20px;
+    }
+    .info-grid, .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .info-card, .side-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 4px 18px rgba(15,23,42,0.06);
+    }
+    .info-card h3, .side-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .info-card p, .side-card p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .controls {
+      background: rgba(255,255,255,0.9);
+      border-radius: 28px;
+      padding: 20px;
+      box-shadow: 0 4px 18px rgba(15,23,42,0.06);
+      margin-bottom: 18px;
+    }
+    .controls h4 {
+      margin: 0 0 14px;
+      font-size: 12px;
+      color: #64748b;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+    }
+    .tab-btn {
+      border: 0;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #f1f5f9;
+      color: #334155;
+    }
+    .tab-btn.active {
+      background: #059669;
+      color: white;
+      box-shadow: 0 10px 24px rgba(5,150,105,0.22);
+    }
+    .phone-shell {
+      max-width: 370px;
+      margin: 0 auto;
+      border: 10px solid #0f172a;
+      border-radius: 40px;
+      background: #020617;
+      padding: 4px;
+      box-shadow: 0 28px 60px rgba(15,23,42,0.18);
+    }
+    .phone {
+      overflow: hidden;
+      border-radius: 30px;
+      background: white;
+      min-height: 760px;
+    }
+    .screen { display: none; min-height: 710px; background: #f8fafc; }
+    .screen.active { display: block; }
+    .hero {
+      padding: 28px 20px 22px;
+      color: white;
+      background:
+        radial-gradient(circle at top right, rgba(16,185,129,0.35), transparent 34%),
+        linear-gradient(135deg,#052e2b 0%,#065f46 48%,#10b981 100%);
+    }
+    .row { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .hero small, .hero p.small { color: #d1fae5; font-size: 14px; }
+    .hero h2 { margin: 6px 0 0; font-size: 28px; }
+    .bell {
+      width: 38px; height: 38px; border-radius: 14px;
+      background: rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center;
+      font-size: 18px;
+    }
+    .glass {
+      margin-top: 16px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 24px;
+      padding: 16px;
+    }
+    .glass .label {
+      margin: 0;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #d1fae5;
+    }
+    .glass h3 { margin: 6px 0 0; font-size: 20px; line-height: 1.3; }
+    .light-btn, .primary-btn, .secondary-btn, .wa-btn {
+      width: 100%; border: 0; border-radius: 18px; padding: 14px 16px; font-weight: 700; cursor: pointer;
+    }
+    .light-btn { margin-top: 14px; background: white; color: #065f46; }
+    .primary-btn { background: #059669; color: white; box-shadow: 0 10px 20px rgba(5,150,105,.2); }
+    .secondary-btn { background: white; color: #334155; border: 1px solid #cbd5e1; }
+    .wa-btn { background: #059669; color:white; }
+    .content { padding: 18px; display: grid; gap: 16px; }
+    .section-title { display:flex; justify-content:space-between; align-items:center; }
+    .section-title h4 {
+      margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: #64748b;
+    }
+    .linkish { color: #059669; font-weight: 700; font-size: 14px; }
+    .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .card {
+      background: white; border-radius: 24px; padding: 16px; box-shadow: 0 4px 18px rgba(15,23,42,.06);
+    }
+    .icon {
+      width: 44px; height: 44px; background: #ecfdf5; color: #059669; border-radius: 16px;
+      display:flex; align-items:center; justify-content:center; font-size: 22px;
+    }
+    .card h5 { margin: 10px 0 4px; font-size: 15px; }
+    .card p { margin: 0; font-size: 12px; color: #64748b; line-height: 1.5; }
+    .dark-panel {
+      background: #0f172a; color: white; border-radius: 24px; padding: 16px;
+    }
+    .dark-panel p { margin: 0; color: #cbd5e1; font-size: 13px; }
+    .dark-panel h4 { margin: 6px 0 12px; font-size: 18px; }
+    .soft-box {
+      background: rgba(255,255,255,.1); border-radius: 16px; padding: 12px; font-size: 14px;
+    }
+    .jobs-header { background: #020617; color: white; padding: 28px 20px 22px; }
+    .jobs-header p { margin: 0; color: #94a3b8; font-size: 14px; }
+    .jobs-header h2 { margin: 6px 0 0; font-size: 28px; }
+    .location {
+      margin-top: 14px; background: rgba(255,255,255,.1); color: #e2e8f0; padding: 12px 14px;
+      border-radius: 16px; font-size: 14px;
+    }
+    .job-card {
+      background: white; border-radius: 24px; padding: 16px; box-shadow: 0 4px 18px rgba(15,23,42,.06);
+      display: grid; gap: 14px;
+    }
+    .badge {
+      display: inline-block; border-radius: 999px; padding: 7px 12px; font-size: 11px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+      background: #ecfdf5; color: #047857;
+    }
+    .badge.dark { background: #0f172a; color: white; }
+    .job-card h3 { margin: 10px 0 6px; font-size: 18px; }
+    .job-card p { margin: 0; color: #64748b; font-size: 14px; line-height: 1.6; }
+    .green-header { background: #059669; color:white; padding: 28px 20px 22px; }
+    .green-header p { margin: 0; color: #d1fae5; font-size: 14px; }
+    .green-header h2 { margin: 6px 0 0; font-size: 28px; }
+    .grid3 { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+    .stat {
+      background:white; border-radius: 20px; padding: 12px; text-align:center; box-shadow: 0 4px 18px rgba(15,23,42,.06);
+    }
+    .stat .label { font-size: 10px; color:#64748b; text-transform:uppercase; letter-spacing:.1em; }
+    .stat .value { margin-top:10px; font-size:13px; font-weight:700; }
+    .booking-row {
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+      background:#f8fafc; border-radius: 16px; padding: 12px;
+    }
+    .booking-row .name { font-size:14px; font-weight:700; }
+    .booking-row .service { font-size:12px; color:#64748b; margin-top:4px; }
+    .booking-row .amount { font-size:14px; font-weight:700; text-align:right; }
+    .booking-row .status { font-size:12px; color:#059669; font-weight:700; margin-top:4px; text-align:right; }
+    .success {
+      background:#0f172a; color:white; border-radius:20px; padding: 14px; font-size:14px;
+    }
+    .profile-header {
+      background: linear-gradient(135deg,#0f172a 0%,#111827 40%,#065f46 100%);
+      color: white; padding: 28px 20px 22px;
+    }
+    .profile-header .avatar {
+      width: 64px; height: 64px; border-radius: 24px; background: rgba(255,255,255,.1);
+      display:flex; align-items:center; justify-content:center; font-size: 32px;
+    }
+    .profile-header h2 { margin: 0; font-size: 28px; }
+    .profile-header p { margin: 4px 0 0; color:#cbd5e1; font-size:14px; }
+    .rating { color: #f59e0b; font-size: 16px; margin-top: 8px; }
+    .menu-btn {
+      width:100%; background:white; border:0; border-radius:24px; padding: 16px;
+      text-align:left; box-shadow: 0 4px 18px rgba(15,23,42,.06); font-weight:700; color:#0f172a;
+    }
+    .contact-card { background:white; border-radius:24px; padding:16px; box-shadow: 0 4px 18px rgba(15,23,42,.06); }
+    .contact-card p { margin: 8px 0; font-size: 14px; color:#334155; }
+    .price-list .item {
+      display:flex; justify-content:space-between; gap:12px; align-items:start;
+      padding: 12px 0; border-bottom: 1px solid #eef2f7;
+    }
+    .price-list .item:last-child { border-bottom: 0; }
+    .price-list strong { display:block; font-size:14px; }
+    .price-list span.note { color:#64748b; font-size:12px; display:block; margin-top:4px; }
+    form { display:grid; gap:12px; }
+    input, select, textarea {
+      width:100%; padding:14px 14px; border:1px solid #dbe2ea; border-radius:16px; font-size:14px;
+      background:white;
+    }
+    textarea { min-height: 88px; resize: vertical; }
+    .muted { color:#64748b; font-size:12px; line-height:1.5; }
+    .bottom-nav {
+      display:grid; grid-template-columns: repeat(4, minmax(0,1fr));
+      background:white; border-top:1px solid #e2e8f0; padding: 10px 8px 12px;
+    }
+    .bottom-nav button {
+      border:0; background:transparent; color:#64748b; display:flex; flex-direction:column;
+      align-items:center; gap:4px; font-size:11px; cursor:pointer;
+    }
+    .bottom-nav button.active { color:#059669; font-weight:700; }
+    @media (max-width: 900px) {
+      .page { grid-template-columns: 1fr; }
+      .info-grid, .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div>
+      <div class="pill">✨ Premium go-live demo</div>
+      <h1>Remahlatse Domestic Services</h1>
+      <p class="lead">
+        This version combines the premium app design with a working booking form, WhatsApp lead capture,
+        Pretoria targeting, and <strong>“starting from” pricing</strong> so you can look professional and still keep pricing flexible.
+      </p>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Lead capture</h3>
+          <p>Customers can fill in booking details and continue directly to WhatsApp.</p>
+        </div>
+        <div class="info-card">
+          <h3>Starting from pricing</h3>
+          <p>Builds trust while keeping your final quote flexible based on size and condition.</p>
+        </div>
+        <div class="info-card">
+          <h3>Pretoria focused</h3>
+          <p>All messaging is aligned to your current service area and contact details.</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <h4>Preview screens</h4>
+        <div class="btn-grid">
+          <button class="tab-btn active" onclick="showScreen('home', this)">Customer Home</button>
+          <button class="tab-btn" onclick="showScreen('jobs', this)">Jobs Feed</button>
+          <button class="tab-btn" onclick="showScreen('book', this)">Book Now</button>
+          <button class="tab-btn" onclick="showScreen('profile', this)">Business Profile</button>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="side-card">
+          <h3>Go-live ready</h3>
+          <p>This version is good enough to publish as a web app and start sharing with potential clients.</p>
+        </div>
+        <div class="side-card">
+          <h3>Best next step</h3>
+          <p>Publish on Netlify first, then buy your domain at month-end and connect it later.</p>
+        </div>
+        <div class="side-card">
+          <h3>Contact flow</h3>
+          <p>Bookings go to WhatsApp on <strong>069 913 2662</strong> with the customer details pre-filled.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone-shell">
+      <div class="phone">
+        <div id="screen-home" class="screen active">
+          <div class="hero">
+            <div class="row">
+              <div>
+                <p class="small">Welcome back</p>
+                <h2>Remahlatse</h2>
+              </div>
+              <div class="bell">🔔</div>
+            </div>
+            <div class="glass">
+              <p class="label">Premium service</p>
+              <h3>Trusted home care at your fingertips</h3>
+              <button class="light-btn" onclick="showScreen('book')">Book a Cleaning Service</button>
+            </div>
+          </div>
+
+          <div class="content">
+            <div class="section-title">
+              <h4>Services</h4>
+              <div class="linkish">View all</div>
+            </div>
+            <div class="grid2">
+              <div class="card"><div class="icon">🏠</div><h5>Home Cleaning</h5><p>Apartments and houses.</p></div>
+              <div class="card"><div class="icon">🏢</div><h5>Office Cleaning</h5><p>Professional workspaces.</p></div>
+              <div class="card"><div class="icon">✨</div><h5>Deep Cleaning</h5><p>Top-to-bottom detailed cleaning.</p></div>
+              <div class="card"><div class="icon">🧺</div><h5>Laundry & Ironing</h5><p>Convenient add-on service.</p></div>
+            </div>
+
+            <div class="dark-panel">
+              <div class="row">
+                <div>
+                  <p>Starting from pricing</p>
+                  <h4>Clear prices, flexible final quotes</h4>
+                </div>
+                <div>›</div>
+              </div>
+              <div class="grid2">
+                <div class="soft-box">Home cleaning from R450</div>
+                <div class="soft-box">Deep cleaning from R800</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="screen-jobs" class="screen">
+          <div class="jobs-header">
+            <p>Lead generation</p>
+            <h2>Cleaning Jobs Near You</h2>
+            <div class="location">📍 Pretoria service area</div>
+          </div>
+
+          <div class="content">
+            <div class="job-card">
+              <div class="row" style="align-items:start;">
+                <div>
+                  <span class="badge">High</span>
+                  <h3>3-Bedroom Deep Clean</h3>
+                  <p>Waterkloof, Pretoria</p>
+                  <p>Today • 14:00</p>
+                </div>
+                <span class="badge dark">R1,250</span>
+              </div>
+              <div class="grid2">
+                <button class="secondary-btn">View Details</button>
+                <button class="primary-btn" onclick="showScreen('book')">Accept Job</button>
+              </div>
+            </div>
+
+            <div class="job-card">
+              <div class="row" style="align-items:start;">
+                <div>
+                  <span class="badge">New</span>
+                  <h3>Airbnb Turnover Cleaning</h3>
+                  <p>Hatfield, Pretoria</p>
+                  <p>Tomorrow • 10:30</p>
+                </div>
+                <span class="badge dark">R980</span>
+              </div>
+              <div class="grid2">
+                <button class="secondary-btn">View Details</button>
+                <button class="primary-btn" onclick="showScreen('book')">Accept Job</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="screen-book" class="screen">
+          <div class="green-header">
+            <p>Book with confidence</p>
+            <h2>Request Your Cleaning Service</h2>
+          </div>
+
+          <div class="content">
+            <div class="card price-list">
+              <div class="section-title">
+                <h4>Starting from prices</h4>
+                <div class="linkish">Flexible quotes</div>
+              </div>
+              <div class="item">
+                <div>
+                  <strong>Home Cleaning — from R450</strong>
+                  <span class="note">Ideal for standard homes and apartments.</span>
+                </div>
+              </div>
+              <div class="item">
+                <div>
+                  <strong>Deep Cleaning — from R800</strong>
+                  <span class="note">For detailed kitchen, bathroom, and full-home care.</span>
+                </div>
+              </div>
+              <div class="item">
+                <div>
+                  <strong>Office Cleaning — from R1,200</strong>
+                  <span class="note">Flexible pricing based on office size and frequency.</span>
+                </div>
+              </div>
+              <div class="item">
+                <div>
+                  <strong>Laundry & Ironing — from R250</strong>
+                  <span class="note">Add-on service for home clients.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="section-title">
+                <h4>Booking form</h4>
+                <div class="linkish">WhatsApp enabled</div>
+              </div>
+              <form onsubmit="sendWhatsApp(event)">
+                <input id="name" placeholder="Your full name" required />
+                <input id="phone" placeholder="Your phone number" required />
+                <select id="service" required>
+                  <option value="">Select service</option>
+                  <option>Home Cleaning</option>
+                  <option>Deep Cleaning</option>
+                  <option>Office Cleaning</option>
+                  <option>Laundry & Ironing</option>
+                  <option>Garden Services</option>
+                </select>
+                <input id="date" placeholder="Preferred date" required />
+                <input id="address" placeholder="Service address in Pretoria" required />
+                <textarea id="notes" placeholder="Extra notes (optional)"></textarea>
+                <button class="wa-btn" type="submit">Continue to WhatsApp</button>
+              </form>
+              <p class="muted">
+                Final price depends on property size, condition, and service scope. This form sends your request
+                to <strong>069 913 2662</strong> on WhatsApp.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="screen-profile" class="screen">
+          <div class="profile-header">
+            <div class="row" style="justify-content:flex-start;">
+              <div class="avatar">👤</div>
+              <div>
+                <h2>Remahlatse</h2>
+                <p>Domestic Services (Pty) Ltd</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content">
+            <div class="card">
+              <div class="row">
+                <div>
+                  <h5 style="margin:0;">Business rating</h5>
+                  <div class="rating">★★★★★ <span style="color:#0f172a;font-weight:700;font-size:14px;">4.9</span></div>
+                </div>
+                <span class="badge">Verified</span>
+              </div>
+            </div>
+
+            <button class="menu-btn">Company profile</button>
+            <button class="menu-btn">Service pricing</button>
+            <button class="menu-btn">Customer reviews</button>
+            <button class="menu-btn" onclick="showScreen('book')">Book now</button>
+
+            <button class="wa-btn" onclick="openDirectWhatsApp()">Contact on WhatsApp</button>
+
+            <div class="contact-card">
+              <p><strong>Phone:</strong> 069 913 2662</p>
+              <p><strong>Email:</strong> info@remahlatse.co.za</p>
+              <p><strong>Area:</strong> Pretoria</p>
+              <p><strong>Pricing strategy:</strong> Starting from pricing + final quote</p>
+              <p><strong>Tagline:</strong> Sparkling Clean Everyday</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-nav">
+          <button class="active" data-id="home" onclick="showScreen('home', null, this)">🏠<span>Home</span></button>
+          <button data-id="jobs" onclick="showScreen('jobs', null, this)">💼<span>Jobs</span></button>
+          <button data-id="book" onclick="showScreen('book', null, this)">📋<span>Book</span></button>
+          <button data-id="profile" onclick="showScreen('profile', null, this)">👤<span>Profile</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showScreen(name, btn, navBtn) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-' + name).classList.add('active');
+
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      else {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          if (b.textContent.toLowerCase().includes(name === 'book' ? 'book' : name)) b.classList.add('active');
+        });
+      }
+
+      document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
+      const targetNav = navBtn || document.querySelector('.bottom-nav button[data-id="' + name + '"]');
+      if (targetNav) targetNav.classList.add('active');
+    }
+
+    function openDirectWhatsApp() {
+      const msg = "Hi Remahlatse, I would like to book a cleaning service in Pretoria.";
+      window.open("https://wa.me/27699132662?text=" + encodeURIComponent(msg), "_blank");
+    }
+
+    function sendWhatsApp(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const service = document.getElementById('service').value;
+      const date = document.getElementById('date').value;
+      const address = document.getElementById('address').value;
+      const notes = document.getElementById('notes').value;
+
+      const msg =
+`Hi Remahlatse, I would like to request a booking.
+
+Name: ${name}
+Phone: ${phone}
+Service: ${service}
+Preferred date: ${date}
+Address: ${address}
+Notes: ${notes || "None"}
+
+Please send me the final quote.`;
+
+      window.open("https://wa.me/27699132662?text=" + encodeURIComponent(msg), "_blank");
+    }
+  </script>
+</body>
+</html>
